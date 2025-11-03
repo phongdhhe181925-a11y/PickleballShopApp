@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.PickleballShopApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.PickleballKing" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+
     </style>
 
-    <style name="Theme.PickleballShopApp" parent="Base.Theme.PickleballShopApp" />
+    <style name="Theme.PickleballKing" parent="Base.Theme.PickleballKing" />
+    <style name="RightSlideDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimationSlideRight</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="DialogAnimationSlideRight">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right</item>
+    </style>
+    <style name="Theme.PickleballKing.WithActionBar" parent="Theme.Material3.DayNight">
+    </style>
+
 </resources>

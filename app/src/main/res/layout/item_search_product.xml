@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
+    android:paddingEnd="12dp"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Ảnh sản phẩm (sát lề trái - không có padding start) -->
+    <ImageView
+        android:id="@+id/searchProductImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:background="#F5F5F5"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <!-- Thông tin sản phẩm (bên phải ảnh) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_gravity="center_vertical">
+
+        <!-- Thương hiệu -->
+        <TextView
+            android:id="@+id/searchProductBrand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:textStyle="normal"
+            tools:text="JOOLA" />
+
+        <!-- Tên sản phẩm -->
+        <TextView
+            android:id="@+id/searchProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Joola Ben Johns Perseus 3 14mm" />
+
+        <!-- Giá -->
+        <TextView
+            android:id="@+id/searchProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            tools:text="5.500.000 đ" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

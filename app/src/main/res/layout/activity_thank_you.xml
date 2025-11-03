@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <include layout="@layout/toolbar_common"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="24dp"> 
+
+            <TextView
+                android:id="@+id/tvThanksTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cảm ơn, User!"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="@android:color/black"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tvThanksMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Đơn hàng của bạn đã được xác nhận\n\nKhách hàng sau khi đặt đơn hàng vui lòng chuyển khoản vào số tài khoản dưới đây:\n\n- Ngân hàng MBBankk\n\n- Số tài khoản: 0002811200900\n\n- Chủ tài khoản: DINH HOANG PHUC\n\nSau khi xác nhận khoản thanh toán, PickleballKing sẽ chuẩn bị đơn hàng để giao tới tay khách hàng theo thông tin đã cung cấp."
+                android:textColor="@android:color/black"/>
+
+            <Button
+                android:id="@+id/btnContinueShopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Tiếp tục mua sắm"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/black"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Container for overlay fragments -->
+    <FrameLayout
+        android:id="@+id/overlay_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

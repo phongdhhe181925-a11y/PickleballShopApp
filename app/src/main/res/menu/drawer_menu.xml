@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_paddles"
+            android:title="Vợt Pickleball" />
+        <item
+            android:id="@+id/nav_shoes"
+            android:title="Giày Pickleball" />
+        <item
+            android:id="@+id/nav_accessories"
+            android:title="Bóng Pickleball" />
+
+    </group>
+
+    
+
+</menu>

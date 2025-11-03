@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_checkout"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giao hàng"
+                    android:textStyle="bold"
+                    android:textSize="24sp"
+                    android:paddingBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ giao hàng"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <EditText
+                    android:id="@+id/etShippingAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập địa chỉ"
+                    android:background="@drawable/edittext_box"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="48dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Số điện thoại 🇻🇳"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+                
+                <EditText
+                    android:id="@+id/etShippingPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập số điện thoại (09xxxxxxxx)"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:background="@drawable/edittext_box"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="48dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phương thức giao hàng"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rgShippingMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <!-- Giao hàng tiết kiệm -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardStandard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true">
+                        
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            
+                            <RadioButton
+                                android:id="@+id/rbStandard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"/>
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_marginStart="12dp">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Giao hàng tiết kiệm"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@android:color/black"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nhận hàng sau 2-4 ngày ( Vận chuyển bởi GHTK )"
+                                    android:textSize="13sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                            
+                            <TextView
+                                android:id="@+id/tvStandardPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50.000 đ"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/black"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Giao hàng nhanh -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardFast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true">
+                        
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            
+                            <RadioButton
+                                android:id="@+id/rbFast"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"/>
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_marginStart="12dp">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Giao hàng nhanh"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@android:color/black"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nhận hàng từ 1-2 ngày ( Vận chuyển bởi ViettelPost )"
+                                    android:textSize="13sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                            
+                            <TextView
+                                android:id="@+id/tvFastPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="100.000 đ"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/black"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Giao hàng siêu tốc -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardExpress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true">
+                        
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            
+                            <RadioButton
+                                android:id="@+id/rbExpress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@android:color/black"/>
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_marginStart="12dp">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Giao hàng siêu tốc"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@android:color/black"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Vận chuyển hỏa tốc 6-24 giờ qua ViettelPost"
+                                    android:textSize="13sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                            
+                            <TextView
+                                android:id="@+id/tvExpressPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="250.000 đ"
+                                android:textStyle="bold"
+                                android:textSize="16sp"
+                                android:textColor="@android:color/black"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thanh toán"
+                    android:textStyle="bold"
+                    android:textSize="24sp"/>
+
+                <RadioGroup
+                    android:id="@+id/rgPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical">
+
+                    <!-- Chuyển khoản ngân hàng -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardBankTransfer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true">
+                        
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            
+                            <RadioButton
+                                android:id="@+id/rbBankTransfer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_marginStart="12dp">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chuyển khoản ngân hàng"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@android:color/black"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Chuyển khoản qua tài khoản ngân hàng trước khi nhận hàng"
+                                    android:textSize="13sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Thanh toán khi nhận hàng -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardCOD"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="2dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        android:clickable="true"
+                        android:focusable="true">
+                        
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            
+                            <RadioButton
+                                android:id="@+id/rbCOD"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:layout_marginStart="12dp">
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Thanh toán khi nhận hàng"
+                                    android:textStyle="bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@android:color/black"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Thanh toán bằng tiền mặt khi nhận được hàng"
+                                    android:textSize="13sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="4dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng quan đơn hàng"
+                    android:textStyle="bold"
+                    android:textSize="24sp"/>
+
+                <LinearLayout
+                    android:id="@+id/llOrderSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"/>
+
+                <!-- Subtotal and Shipping rows under order summary -->
+                <RelativeLayout
+                    android:id="@+id/rlSubtotalRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/tvSubtotalLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng phụ: 0 mặt hàng"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:layout_alignParentStart="true"/>
+
+                    <TextView
+                        android:id="@+id/tvSubtotalRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0₫"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlShippingRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvShippingLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Phí giao hàng"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:layout_alignParentStart="true"/>
+
+                    <TextView
+                        android:id="@+id/tvShippingRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0₫"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvOrderTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"/>
+
+            <Button
+                android:id="@+id/btnPlaceOrder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hoàn tất đơn hàng"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@android:color/black"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Container for overlay fragments -->
+    <FrameLayout
+        android:id="@+id/overlay_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

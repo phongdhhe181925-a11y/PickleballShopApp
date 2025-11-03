@@ -32,7 +32,13 @@ android {
 }
 
 dependencies {
-
+// Retrofit (gọi API)
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+// Glide (tải ảnh)
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+// RecyclerView (hiển thị danh sách)
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

@@ -3,5 +3,8 @@
     <style name="Base.Theme.PickleballShopApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+    <style name="Theme.PickleballKing.WithActionBar" parent="Theme.Material3.DayNight">
     </style>
 </resources>

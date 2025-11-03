@@ -1,0 +1,84 @@
+package com.example.pickleballshopapp;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Query;
+
+public interface ApiService {
+
+    // Định nghĩa endpoint. Tên file "get_products.php"
+    // phải khớp với tên file PHP của bạn.
+    @GET("get_products.php")
+    Call<ProductResponse> getProducts();
+
+    // Sau này bạn sẽ thêm các API khác ở đây, ví dụ:
+    // @POST("login.php")
+    // Call<LoginResponse> loginUser(@Field("email") String email, @Field("password") String password);
+    // API Đăng nhập
+    @POST("login.php")
+    Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+
+    // API Đăng ký
+    @POST("register.php")
+    Call<AuthResponse> registerUser(@Body RegisterRequest registerRequest);
+
+    // ==============================
+
+    // Cart APIs
+    @GET("cart_get.php")
+    Call<CartResponse> getCart(@Query("user_id") int userId);
+
+    @POST("cart_add.php")
+    Call<BaseResponse> addToCart(@Body CartAddRequest req);
+
+    @POST("cart_update.php")
+    Call<BaseResponse> updateCart(@Body CartUpdateRequest req);
+
+    @POST("cart_remove.php")
+    Call<BaseResponse> removeFromCart(@Body CartRemoveRequest req);
+
+    @POST("cart_clear.php")
+    Call<BaseResponse> clearCart(@Body UserOnlyRequest req);
+
+    // Orders APIs
+    @POST("order_checkout.php")
+    Call<CheckoutResponse> checkout(@Body UserOnlyRequest req);
+
+    @GET("orders_list.php")
+    Call<OrdersResponse> getOrders(@Query("user_id") int userId);
+
+    @POST("order_cancel.php")
+    Call<BaseResponse> cancelOrder(@Body CancelOrderRequest req);
+
+    @POST("user_update.php")
+    Call<BaseResponse> updateUser(@Body UpdateUserRequest req);
+
+    @GET("order_details.php")
+    Call<OrderDetailsResponse> getOrderDetails(@Query("order_id") int orderId, @Query("user_id") int userId);
+
+    // API Lấy chi tiết sản phẩm
+    @GET("get_product_detail.php")
+    Call<ProductDetailResponse> getProductDetail(@Query("product_id") int productId);
+
+    // API Lấy New Arrival
+    @GET("get_new_arrival.php")
+    Call<ProductResponse> getNewArrival();
+
+    // API Lấy Best Seller
+    @GET("get_best_seller.php")
+    Call<ProductResponse> getBestSeller();
+
+    // API Tìm kiếm sản phẩm
+    @GET("search_products.php")
+    Call<ProductResponse> searchProducts(@Query("keyword") String keyword);
+
+    // API Lấy Giày
+    @GET("get_shoes.php")
+    Call<ProductResponse> getShoes();
+
+    // API Lấy Bóng thi đấu
+    @GET("get_balls.php")
+    Call<ProductResponse> getBalls();
+}

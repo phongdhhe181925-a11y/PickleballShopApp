@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/itemCartImage"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:background="#EEE"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/itemCartInfoContainer"
+            android:layout_alignBottom="@id/itemCartInfoContainer"/>
+
+        <LinearLayout
+            android:id="@+id/itemCartInfoContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/itemCartImage"
+            android:layout_toStartOf="@id/itemCartBtnDelete"
+            android:layout_marginStart="18dp"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/itemCartBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thương hiệu"
+            android:textColor="#999999"
+            android:textSize="13sp"
+            android:layout_marginBottom="1dp"/>
+
+        <TextView
+            android:id="@+id/itemCartName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên sản phẩm"
+            android:textStyle="bold"
+            android:textColor="#111"
+            android:textSize="16sp"
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/itemCartOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#999999"
+            android:textSize="13sp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="1dp"/>
+
+        <TextView
+            android:id="@+id/itemCartPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100.000 VND"
+            android:textColor="#444"
+            android:textSize="14sp"
+            android:layout_marginTop="1dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical">
+            <ImageButton
+                android:id="@+id/itemCartBtnMinus"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/arrow_down_float"
+                android:tint="@android:color/black"
+                android:contentDescription="Giảm"
+                android:layout_marginEnd="4dp" />
+            <TextView
+                android:id="@+id/itemCartQuantity"
+                android:layout_width="36dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="16sp"
+                android:textColor="#111"
+                android:textStyle="bold" />
+            <ImageButton
+                android:id="@+id/itemCartBtnPlus"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/arrow_up_float"
+                android:tint="@android:color/black"
+                android:contentDescription="Tăng"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/itemCartBtnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xóa"
+            android:textColor="#555555"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:autoLink="none"
+            android:padding="0dp" />
+
+    </RelativeLayout>
+    
+    <!-- Đường kẻ ngăn cách giữa các sản phẩm -->
+    <View
+        android:id="@+id/cartDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp" />
+
+</LinearLayout>
