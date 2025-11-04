@@ -1,10 +1,12 @@
 package com.example.pickleballshopapp;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 import android.widget.ImageButton;
 
 import java.util.List;
@@ -45,6 +48,14 @@ public class HomeFragment extends Fragment {
     private ImageButton btnShoesNext;
     private ImageButton btnBallsPrev;
     private ImageButton btnBallsNext;
+    
+    // Carousel variables
+    private ViewPager2 carouselViewPager;
+    private LinearLayout carouselIndicators;
+    private Handler carouselHandler;
+    private Runnable carouselRunnable;
+    private CarouselAdapter carouselAdapter;
+    private ViewPager2.OnPageChangeCallback carouselPageChangeCallback;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -120,7 +131,13 @@ public class HomeFragment extends Fragment {
         btnBallsPrev.setOnClickListener(v -> scrollRecyclerView(ballsRecyclerView, -1));
         btnBallsNext.setOnClickListener(v -> scrollRecyclerView(ballsRecyclerView, 1));
 
+        // Ánh xạ carousel views
+        carouselViewPager = view.findViewById(R.id.carouselViewPager);
+        carouselIndicators = view.findViewById(R.id.carouselIndicators);
+        carouselHandler = new Handler();
+
         // Gọi các hàm để lấy dữ liệu
+        fetchCarousel();
         fetchNewArrival();
         fetchBestSeller();
         fetchShoes();
@@ -215,6 +232,115 @@ public class HomeFragment extends Fragment {
         });
     }
     
+    // Fetch Carousel Images
+    private void fetchCarousel() {
+        ApiService apiService = RetrofitClient.getApiService();
+        Call<CarouselResponse> call = apiService.getCarouselImages();
+
+        call.enqueue(new Callback<CarouselResponse>() {
+            @Override
+            public void onResponse(Call<CarouselResponse> call, Response<CarouselResponse> response) {
+                if (!isAdded()) return;
+
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    List<CarouselImage> images = response.body().getData();
+                    if (images != null && !images.isEmpty()) {
+                        setupCarousel(images);
+                        carouselViewPager.setVisibility(View.VISIBLE);
+                        carouselIndicators.setVisibility(View.VISIBLE);
+                    } else {
+                        carouselViewPager.setVisibility(View.GONE);
+                        carouselIndicators.setVisibility(View.GONE);
+                    }
+                } else {
+                    carouselViewPager.setVisibility(View.GONE);
+                    carouselIndicators.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CarouselResponse> call, Throwable t) {
+                if (!isAdded()) return;
+                Log.e("API_FAILURE", "Error fetching Carousel: " + t.getMessage());
+                carouselViewPager.setVisibility(View.GONE);
+                carouselIndicators.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    // Setup carousel với auto-scroll
+    private void setupCarousel(List<CarouselImage> images) {
+        if (images == null || images.isEmpty() || !isAdded()) return;
+
+        carouselAdapter = new CarouselAdapter(images);
+        carouselViewPager.setAdapter(carouselAdapter);
+
+        // Setup indicators
+        setupIndicators(images.size());
+
+        // Auto-scroll mỗi 5 giây
+        carouselRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (carouselViewPager != null && carouselAdapter != null && isAdded()) {
+                    int currentItem = carouselViewPager.getCurrentItem();
+                    int totalItems = carouselAdapter.getItemCount();
+                    if (totalItems > 0) {
+                        carouselViewPager.setCurrentItem((currentItem + 1) % totalItems, true);
+                    }
+                    if (carouselHandler != null) {
+                        carouselHandler.postDelayed(this, 5000);
+                    }
+                }
+            }
+        };
+        carouselHandler.postDelayed(carouselRunnable, 5000);
+
+        // Dừng auto-scroll khi user vuốt, sau đó restart
+        carouselPageChangeCallback = new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (carouselHandler != null && carouselRunnable != null) {
+                    carouselHandler.removeCallbacks(carouselRunnable);
+                    carouselHandler.postDelayed(carouselRunnable, 5000);
+                    updateIndicators(position);
+                }
+            }
+        };
+        carouselViewPager.registerOnPageChangeCallback(carouselPageChangeCallback);
+    }
+
+    // Setup indicators (chấm tròn)
+    private void setupIndicators(int count) {
+        if (carouselIndicators == null || !isAdded()) return;
+
+        carouselIndicators.removeAllViews();
+        for (int i = 0; i < count; i++) {
+            View indicator = new View(requireContext());
+            int size = (int) (8 * getResources().getDisplayMetrics().density);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(size, size);
+            params.setMargins((int) (8 * getResources().getDisplayMetrics().density), 0, 
+                            (int) (8 * getResources().getDisplayMetrics().density), 0);
+            indicator.setLayoutParams(params);
+            indicator.setBackgroundResource(R.drawable.indicator_unselected);
+            carouselIndicators.addView(indicator);
+        }
+        if (count > 0) {
+            updateIndicators(0);
+        }
+    }
+
+    private void updateIndicators(int position) {
+        if (carouselIndicators == null || !isAdded()) return;
+
+        for (int i = 0; i < carouselIndicators.getChildCount(); i++) {
+            View indicator = carouselIndicators.getChildAt(i);
+            indicator.setBackgroundResource(i == position ?
+                    R.drawable.indicator_selected : R.drawable.indicator_unselected);
+        }
+    }
+
     // Biến đếm số API đã hoàn thành
     private int apiCompletedCount = 0;
     private static final int TOTAL_APIS = 4; // New Arrival, Best Seller, Shoes, Balls
@@ -378,6 +504,18 @@ public class HomeFragment extends Fragment {
         } else {
             btnPrev.setVisibility(View.GONE);
             btnNext.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Cleanup carousel handler
+        if (carouselHandler != null && carouselRunnable != null) {
+            carouselHandler.removeCallbacks(carouselRunnable);
+        }
+        if (carouselViewPager != null && carouselPageChangeCallback != null) {
+            carouselViewPager.unregisterOnPageChangeCallback(carouselPageChangeCallback);
         }
     }
 

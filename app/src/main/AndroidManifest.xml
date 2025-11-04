@@ -48,6 +48,10 @@
             android:exported="false"
             android:theme="@style/Theme.PickleballKing" />
         <activity
+            android:name=".ProductListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PickleballKing" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

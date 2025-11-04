@@ -34,8 +34,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        androidx.recyclerview.widget.RecyclerView drawerRecycler = findViewById(R.id.drawerRecyclerView);
+        DrawerAdapter adapter = new DrawerAdapter(this, new DrawerAdapter.Callback() {
+            @Override
+            public void onOpenAll(String category) {
+                Intent i = new Intent(MainActivity.this, ProductListActivity.class);
+                i.putExtra("category", category);
+                startActivity(i);
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+
+            @Override
+            public void onOpenBrand(String category, int brandId, String brandName) {
+                Intent i = new Intent(MainActivity.this, ProductListActivity.class);
+                i.putExtra("category", category);
+                i.putExtra("brandId", brandId);
+                i.putExtra("brandName", brandName);
+                startActivity(i);
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+
+            @Override
+            public void onOpenBallsAll() {
+                Intent i = new Intent(MainActivity.this, ProductListActivity.class);
+                i.putExtra("category", "balls");
+                startActivity(i);
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        drawerRecycler.setAdapter(adapter);
+        drawerRecycler.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
+
+        // Build groups with placeholder brands for now
+        java.util.List<DrawerAdapter.Group> groups = new java.util.ArrayList<>();
+        DrawerAdapter.Group rackets = new DrawerAdapter.Group("Vợt Pickleball", "racket", false);
+        rackets.children.add(new DrawerAdapter.Child("Xem tất cả Vợt", "racket", true, 0));
+        rackets.children.add(new DrawerAdapter.Child("CRBN", "racket", false, 4));
+        groups.add(rackets);
+
+        DrawerAdapter.Group shoes = new DrawerAdapter.Group("Giày Pickleball", "shoes", false);
+        shoes.children.add(new DrawerAdapter.Child("Xem tất cả Giày", "shoes", true, 0));
+        shoes.children.add(new DrawerAdapter.Child("ASICS", "shoes", false, 7));
+        shoes.children.add(new DrawerAdapter.Child("BABOLAT", "shoes", false, 8));
+        groups.add(shoes);
+
+        DrawerAdapter.Group balls = new DrawerAdapter.Group("Bóng Pickleball", "balls", false);
+        groups.add(balls);
+
+        adapter.setData(groups);
 
         View toolbarLogo = findViewById(R.id.toolbar_logo);
         toolbarLogo.setOnClickListener(v -> {
@@ -134,11 +180,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = menuItem.getItemId();
 
         if (id == R.id.nav_paddles) {
-            // Handle paddle navigation
+            Intent i = new Intent(this, ProductListActivity.class);
+            i.putExtra("category", "racket");
+            startActivity(i);
         } else if (id == R.id.nav_shoes) {
-            // Handle shoes navigation
+            Intent i = new Intent(this, ProductListActivity.class);
+            i.putExtra("category", "shoes");
+            startActivity(i);
         } else if (id == R.id.nav_accessories) {
-            // Handle accessories navigation
+            Intent i = new Intent(this, ProductListActivity.class);
+            i.putExtra("category", "balls");
+            startActivity(i);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

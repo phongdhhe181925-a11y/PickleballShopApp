@@ -34,7 +34,11 @@ public class SearchFragment extends Fragment {
     private RecyclerView searchResultsRecyclerView;
     private LinearLayout searchResultsLabelContainer;
     private TextView searchResultsLabel;
-    private TextView searchEmptyTextView;
+    private LinearLayout searchEmptyContainer;
+    private TextView searchEmptyTitle1;
+    private TextView searchEmptyTitle2;
+    private TextView searchEmptyHint1;
+    private TextView searchEmptyHint2;
     private ProgressBar searchProgressBar;
     
     private SearchProductAdapter searchAdapter;
@@ -62,7 +66,11 @@ public class SearchFragment extends Fragment {
         searchResultsRecyclerView = view.findViewById(R.id.searchResultsRecyclerView);
         searchResultsLabelContainer = view.findViewById(R.id.searchResultsLabelContainer);
         searchResultsLabel = view.findViewById(R.id.searchResultsLabel);
-        searchEmptyTextView = view.findViewById(R.id.searchEmptyTextView);
+        searchEmptyContainer = view.findViewById(R.id.searchEmptyContainer);
+        searchEmptyTitle1 = view.findViewById(R.id.searchEmptyTitle1);
+        searchEmptyTitle2 = view.findViewById(R.id.searchEmptyTitle2);
+        searchEmptyHint1 = view.findViewById(R.id.searchEmptyHint1);
+        searchEmptyHint2 = view.findViewById(R.id.searchEmptyHint2);
         searchProgressBar = view.findViewById(R.id.searchProgressBar);
 
         // Setup RecyclerView với LinearLayoutManager (vertical) - mỗi sản phẩm 1 dòng
@@ -134,7 +142,7 @@ public class SearchFragment extends Fragment {
         searchProgressBar.setVisibility(View.VISIBLE);
         searchResultsRecyclerView.setVisibility(View.GONE);
         searchResultsLabelContainer.setVisibility(View.GONE);
-        searchEmptyTextView.setVisibility(View.GONE);
+        searchEmptyContainer.setVisibility(View.GONE);
         
         // Gọi API search
         ApiService apiService = RetrofitClient.getApiService();
@@ -162,19 +170,19 @@ public class SearchFragment extends Fragment {
                         searchResultsLabel.setText("Sản phẩm");
                         searchResultsLabelContainer.setVisibility(View.VISIBLE);
                         
-                        searchEmptyTextView.setVisibility(View.GONE);
+                        searchEmptyContainer.setVisibility(View.GONE);
                     } else {
                         // Không có kết quả
                         searchResultsRecyclerView.setVisibility(View.GONE);
                         searchResultsLabelContainer.setVisibility(View.GONE);
-                        searchEmptyTextView.setText("Không tìm thấy sản phẩm nào cho \"" + searchKeyword + "\"");
-                        searchEmptyTextView.setVisibility(View.VISIBLE);
+                        searchEmptyTitle2.setText("nào cho \"" + searchKeyword + "\".");
+                        searchEmptyContainer.setVisibility(View.VISIBLE);
                     }
                 } else {
                     searchResultsRecyclerView.setVisibility(View.GONE);
                     searchResultsLabelContainer.setVisibility(View.GONE);
-                    searchEmptyTextView.setText("Lỗi khi tìm kiếm. Vui lòng thử lại.");
-                    searchEmptyTextView.setVisibility(View.VISIBLE);
+                    searchEmptyTitle2.setText("nào cho \"\".");
+                    searchEmptyContainer.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -187,8 +195,8 @@ public class SearchFragment extends Fragment {
                 searchProgressBar.setVisibility(View.GONE);
                 searchResultsRecyclerView.setVisibility(View.GONE);
                 searchResultsLabelContainer.setVisibility(View.GONE);
-                searchEmptyTextView.setText("Lỗi kết nối. Vui lòng kiểm tra mạng và thử lại.");
-                searchEmptyTextView.setVisibility(View.VISIBLE);
+                searchEmptyTitle2.setText("nào cho \"\".");
+                searchEmptyContainer.setVisibility(View.VISIBLE);
                 
                 Log.e("SearchFragment", "Error searching products: " + t.getMessage());
             }
@@ -198,8 +206,7 @@ public class SearchFragment extends Fragment {
     private void clearSearchResults() {
         searchResultsRecyclerView.setVisibility(View.GONE);
         searchResultsLabelContainer.setVisibility(View.GONE);
-        searchEmptyTextView.setText("Nhập từ khóa để tìm kiếm sản phẩm");
-        searchEmptyTextView.setVisibility(View.VISIBLE);
+        searchEmptyContainer.setVisibility(View.GONE);
         if (searchAdapter != null) {
             searchAdapter = null;
         }

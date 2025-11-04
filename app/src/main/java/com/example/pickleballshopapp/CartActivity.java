@@ -21,6 +21,9 @@ public class CartActivity extends AppCompatActivity {
     private TextView emptyCartText;
     private TextView tvCartTotal;
     private TextView tvCartPrice;
+    private View totalAndCheckoutContainer;
+    private View cartDivider;
+    private TextView tvCartShippingNote;
     private List<Product> cartItems;
 
     @Override
@@ -44,6 +47,9 @@ public class CartActivity extends AppCompatActivity {
         checkoutButton = findViewById(R.id.checkoutButton);
         tvCartTotal = findViewById(R.id.tvCartTotal);
         tvCartPrice = findViewById(R.id.tvCartPrice);
+        totalAndCheckoutContainer = findViewById(R.id.totalAndCheckoutContainer);
+        cartDivider = findViewById(R.id.cartDivider);
+        tvCartShippingNote = findViewById(R.id.tvCartShippingNote);
         // Sử dụng nút back mặc định trên Action Bar (đã xử lý trong onOptionsItemSelected)
         emptyCartText = findViewById(R.id.emptyCartText);
 
@@ -52,14 +58,14 @@ public class CartActivity extends AppCompatActivity {
 
         // 3. Kiểm tra xem giỏ hàng có trống không
         if (cartItems.isEmpty()) {
-            // Nếu trống: Ẩn danh sách và nút, hiện chữ "Giỏ hàng trống"
+            // Nếu trống: Ẩn danh sách và container tổng tiền, hiện chữ "Giỏ hàng trống"
             cartRecyclerView.setVisibility(View.GONE);
-            checkoutButton.setVisibility(View.GONE);
+            totalAndCheckoutContainer.setVisibility(View.GONE);
             emptyCartText.setVisibility(View.VISIBLE);
         } else {
-            // 4. Nếu có hàng: Hiện danh sách và nút, ẩn chữ "Giỏ hàng trống"
+            // 4. Nếu có hàng: Hiện danh sách và container tổng tiền, ẩn chữ "Giỏ hàng trống"
             cartRecyclerView.setVisibility(View.VISIBLE);
-            checkoutButton.setVisibility(View.VISIBLE);
+            totalAndCheckoutContainer.setVisibility(View.VISIBLE);
             emptyCartText.setVisibility(View.GONE);
 
             // Cài đặt RecyclerView
@@ -99,15 +105,22 @@ public class CartActivity extends AppCompatActivity {
     // Không xử lý nút back trên action bar vì đã tắt hiển thị
 
     private void updateTotal() {
+        // Cập nhật lại cartItems từ CartManager để lấy dữ liệu mới nhất
+        cartItems = CartManager.getCartItems();
+        
         if (cartItems.isEmpty()) {
             cartRecyclerView.setVisibility(View.GONE);
-            checkoutButton.setVisibility(View.GONE);
-            tvCartTotal.setVisibility(View.GONE);
+            totalAndCheckoutContainer.setVisibility(View.GONE);
+            tvCartPrice.setText("0₫");
             emptyCartText.setVisibility(View.VISIBLE);
         } else {
             cartRecyclerView.setVisibility(View.VISIBLE);
+            totalAndCheckoutContainer.setVisibility(View.VISIBLE);
             checkoutButton.setVisibility(View.VISIBLE);
             tvCartTotal.setVisibility(View.VISIBLE);
+            tvCartPrice.setVisibility(View.VISIBLE);
+            cartDivider.setVisibility(View.VISIBLE);
+            tvCartShippingNote.setVisibility(View.VISIBLE);
             emptyCartText.setVisibility(View.GONE);
             java.text.NumberFormat vn = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("vi","VN"));
             double total = 0d;

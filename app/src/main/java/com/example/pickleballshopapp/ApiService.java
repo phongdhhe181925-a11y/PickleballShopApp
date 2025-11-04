@@ -13,6 +13,15 @@ public interface ApiService {
     @GET("get_products.php")
     Call<ProductResponse> getProducts();
 
+    // Lấy sản phẩm có filter category/brand (nullable) + phân trang (tuỳ chọn)
+    @GET("get_products.php")
+    Call<ProductResponse> getProductsFiltered(
+            @Query("category_id") Integer categoryId,
+            @Query("brand_id") Integer brandId,
+            @Query("page") Integer page,
+            @Query("limit") Integer limit
+    );
+
     // Sau này bạn sẽ thêm các API khác ở đây, ví dụ:
     // @POST("login.php")
     // Call<LoginResponse> loginUser(@Field("email") String email, @Field("password") String password);
@@ -81,4 +90,12 @@ public interface ApiService {
     // API Lấy Bóng thi đấu
     @GET("get_balls.php")
     Call<ProductResponse> getBalls();
+
+    // API Lấy Carousel Images
+    @GET("get_carousel.php")
+    Call<CarouselResponse> getCarouselImages();
+
+    // Lấy brands theo category để hiển thị trong drawer
+    @GET("get_brands.php")
+    Call<BrandResponse> getBrandsByCategory(@Query("category_id") int categoryId);
 }

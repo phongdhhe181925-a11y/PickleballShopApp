@@ -26,6 +26,7 @@ public class CartFragment extends Fragment {
     private TextView emptyCartText;
     private TextView tvCartTotal;
     private TextView tvCartPrice;
+    private TextView fragmentShippingNote;
     private List<Product> cartItems;
 
     public CartFragment() {
@@ -51,6 +52,7 @@ public class CartFragment extends Fragment {
         emptyCartText = view.findViewById(R.id.fragmentEmptyCartText);
         tvCartTotal = view.findViewById(R.id.fragmentTvCartTotal);
         tvCartPrice = view.findViewById(R.id.fragmentTvCartPrice);
+        fragmentShippingNote = view.findViewById(R.id.fragmentShippingNote);
 // === THÊM CODE XỬ LÝ NÚT ĐÓNG VÀO ĐÂY (Dòng 58) ===
         // Ánh xạ nút đóng (X)
         // (Bấm Alt+Enter để import android.widget.ImageButton)
@@ -72,11 +74,15 @@ public class CartFragment extends Fragment {
         if (cartItems.isEmpty()) {
             cartRecyclerView.setVisibility(View.GONE);
             checkoutButton.setVisibility(View.GONE);
+            viewCartButton.setVisibility(View.GONE);
+            fragmentShippingNote.setVisibility(View.GONE);
             emptyCartText.setVisibility(View.VISIBLE);
         } else {
             // 4. If not empty, show RecyclerView
             cartRecyclerView.setVisibility(View.VISIBLE);
             checkoutButton.setVisibility(View.VISIBLE);
+            viewCartButton.setVisibility(View.VISIBLE);
+            fragmentShippingNote.setVisibility(View.VISIBLE);
             emptyCartText.setVisibility(View.GONE);
 
             // Setup RecyclerView (use requireContext() in Fragments)
@@ -115,15 +121,25 @@ public class CartFragment extends Fragment {
     }
 
     private void updateTotal() {
+        // Cập nhật lại cartItems từ CartManager để lấy dữ liệu mới nhất
+        cartItems = CartManager.getCartItems();
+        
         if (cartItems.isEmpty()) {
             cartRecyclerView.setVisibility(View.GONE);
             checkoutButton.setVisibility(View.GONE);
+            viewCartButton.setVisibility(View.GONE);
+            fragmentShippingNote.setVisibility(View.GONE);
             tvCartTotal.setVisibility(View.GONE);
-            if (tvCartPrice != null) tvCartPrice.setVisibility(View.GONE);
+            if (tvCartPrice != null) {
+                tvCartPrice.setVisibility(View.GONE);
+                tvCartPrice.setText("0₫");
+            }
             emptyCartText.setVisibility(View.VISIBLE);
         } else {
             cartRecyclerView.setVisibility(View.VISIBLE);
             checkoutButton.setVisibility(View.VISIBLE);
+            viewCartButton.setVisibility(View.VISIBLE);
+            fragmentShippingNote.setVisibility(View.VISIBLE);
             tvCartTotal.setVisibility(View.VISIBLE);
             if (tvCartPrice != null) tvCartPrice.setVisibility(View.VISIBLE);
             emptyCartText.setVisibility(View.GONE);

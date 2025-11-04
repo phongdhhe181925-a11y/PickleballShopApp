@@ -9,29 +9,32 @@
     android:background="@android:color/white"
     android:clickable="true"
     android:focusable="true"
-    tools:context=".SearchFragment"> <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:paddingHorizontal="16dp">
+    tools:context=".SearchFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tìm kiếm"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_centerVertical="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingHorizontal="16dp">
 
-    <ImageButton
-        android:id="@+id/fragment_close_search_button" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="Đóng"/>
-</RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tìm kiếm"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_centerVertical="true"/>
+
+        <ImageButton
+            android:id="@+id/fragment_close_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="Đóng"/>
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -110,15 +113,57 @@
         android:paddingBottom="0dp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/searchEmptyTextView"
+    <LinearLayout
+        android:id="@+id/searchEmptyContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nhập từ khóa để tìm kiếm sản phẩm"
-        android:padding="32dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:textSize="16sp"
-        android:textColor="#666666" />
+        android:paddingTop="48dp"
+        android:paddingHorizontal="32dp"
+        android:visibility="gone">
+        
+        <TextView
+            android:id="@+id/searchEmptyTitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Không tìm thấy kết quả"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+        
+        <TextView
+            android:id="@+id/searchEmptyTitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nào cho &quot;&quot;."
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+        
+        <TextView
+            android:id="@+id/searchEmptyHint1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Kiểm tra chính tả hoặc sử dụng một từ"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+        
+        <TextView
+            android:id="@+id/searchEmptyHint2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hoặc cụm từ khác."
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@android:color/black"
+            android:gravity="center" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/searchProgressBar"

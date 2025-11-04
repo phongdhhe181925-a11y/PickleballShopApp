@@ -101,6 +101,10 @@ public class ProductDetailActivity extends AppCompatActivity {
             tvQuantity.setText(String.valueOf(currentQuantity));
 
             btnIncrease.setOnClickListener(v -> {
+                // Chưa chọn đủ option value: không làm gì và không hiện thông báo
+                if (!areAllOptionsSelected()) {
+                    return;
+                }
                 int maxQty = getMaxQuantity();
                 if (currentQuantity < maxQty) {
                     currentQuantity++;
@@ -111,6 +115,10 @@ public class ProductDetailActivity extends AppCompatActivity {
             });
 
             btnDecrease.setOnClickListener(v -> {
+                // Chưa chọn đủ option value: không làm gì và không hiện thông báo
+                if (!areAllOptionsSelected()) {
+                    return;
+                }
                 if (currentQuantity > 1) {
                     currentQuantity--;
                     tvQuantity.setText(String.valueOf(currentQuantity));

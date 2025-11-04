@@ -19,6 +19,91 @@
             android:layout_marginTop="32dp"
             android:visibility="visible" />
 
+        <!-- Carousel Section -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/carouselViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/carouselIndicators"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+        <!-- Intro Section under Carousel -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp">
+
+            <!-- Title: line 1 -->
+            <TextView
+                android:id="@+id/homeIntroTitleLine1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chào mừng bạn đến"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="28sp" />
+
+            <!-- Title: line 2 -->
+            <TextView
+                android:id="@+id/homeIntroTitleLine2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PickleballKing Việt Nam"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="28sp" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:id="@+id/homeIntroSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Nâng tầm cuộc chơi - Khẳng định đẳng cấp!"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="18sp" />
+
+            <!-- Paragraph 1 -->
+            <TextView
+                android:id="@+id/homeIntroParagraph1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="PickleballKing Việt Nam tự hào là điểm đến tin cậy đầu tiên cho cộng đồng yêu thích Pickleball, nơi niềm đam mê với môn thể thao năng động này được thăng hoa và lan tỏa. Chúng tôi không chỉ đơn thuần là một địa chỉ mua sắm, mà còn là người đồng hành đáng tin cậy trên hành trình khám phá và phát triển kỹ năng Pickleball của bạn."
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <!-- Paragraph 2 -->
+            <TextView
+                android:id="@+id/homeIntroParagraph2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Hãy để PickleballKing đồng hành cùng bạn trong hành trình chinh phục những đỉnh cao mới, và cùng nhau xây dựng một cộng đồng Pickleball sôi động tại Việt Nam!"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
         <!-- Section New Arrival -->
         <TextView
             android:id="@+id/newArrivalLabel"
