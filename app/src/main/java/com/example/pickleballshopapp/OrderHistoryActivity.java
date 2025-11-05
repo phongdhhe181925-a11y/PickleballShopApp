@@ -92,34 +92,53 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
             // Theo yêu cầu: nút đã ẩn, phòng hờ
             return;
         }
-        SessionManager sm = new SessionManager(this);
-        int userId = 0;
-        try {
-            userId = Integer.parseInt(sm.getUserId());
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Lỗi tài khoản, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        
+        // Hiển thị dialog để nhập lí do hủy đơn
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_cancel_order);
+        
+        android.widget.EditText etReason = dialog.findViewById(R.id.etCancelReason);
+        Button btnCancelDialog = dialog.findViewById(R.id.btnCancelDialog);
+        Button btnConfirmCancel = dialog.findViewById(R.id.btnConfirmCancel);
+        
+        btnCancelDialog.setOnClickListener(v -> dialog.dismiss());
+        
+        btnConfirmCancel.setOnClickListener(v -> {
+            String reason = etReason.getText().toString().trim();
+            
+            SessionManager sm = new SessionManager(this);
+            int userId = 0;
+            try {
+                userId = Integer.parseInt(sm.getUserId());
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Lỗi tài khoản, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                return;
+            }
 
-        ApiService api = RetrofitClient.getApiService();
-        api.cancelOrder(new CancelOrderRequest(userId, order.getId()))
-                .enqueue(new Callback<BaseResponse>() {
-                    @Override
-                    public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                        BaseResponse body = response.body();
-                        if (body != null && body.isSuccess()) {
-                            Toast.makeText(OrderHistoryActivity.this, "Đã hủy đơn", Toast.LENGTH_SHORT).show();
-                            loadOrders();
-                        } else {
-                            Toast.makeText(OrderHistoryActivity.this, body != null ? body.getMessage() : "Hủy đơn thất bại", Toast.LENGTH_SHORT).show();
+            ApiService api = RetrofitClient.getApiService();
+            api.cancelOrder(new CancelOrderRequest(userId, order.getId(), reason))
+                    .enqueue(new Callback<BaseResponse>() {
+                        @Override
+                        public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                            BaseResponse body = response.body();
+                            if (body != null && body.isSuccess()) {
+                                Toast.makeText(OrderHistoryActivity.this, "Đã hủy đơn", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                loadOrders();
+                            } else {
+                                Toast.makeText(OrderHistoryActivity.this, body != null ? body.getMessage() : "Hủy đơn thất bại", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        Toast.makeText(OrderHistoryActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<BaseResponse> call, Throwable t) {
+                            Toast.makeText(OrderHistoryActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        });
+        
+        dialog.show();
     }
 
     @Override

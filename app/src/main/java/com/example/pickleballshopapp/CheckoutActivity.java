@@ -533,6 +533,26 @@ public class CheckoutActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     CartManager.getCartItems().clear();
                     Intent intent = new Intent(CheckoutActivity.this, ThankYouActivity.class);
+                    // Truyền dữ liệu đơn hàng
+                    intent.putExtra("order_address", address);
+                    intent.putExtra("order_phone", phone);
+                    // Lấy tên phương thức giao hàng
+                    String shippingMethodName = "Giao hàng tiết kiệm";
+                    if (rgShippingMethod.getCheckedRadioButtonId() == R.id.rbFast) {
+                        shippingMethodName = "Giao hàng nhanh";
+                    } else if (rgShippingMethod.getCheckedRadioButtonId() == R.id.rbExpress) {
+                        shippingMethodName = "Giao hàng siêu tốc";
+                    }
+                    intent.putExtra("order_shipping_method", shippingMethodName);
+                    // Lấy tên phương thức thanh toán
+                    String paymentMethodName = "Chuyển khoản ngân hàng";
+                    boolean isCod = currentPaymentMethod.equals("cod");
+                    if (isCod) {
+                        paymentMethodName = "Thanh toán khi nhận hàng";
+                    }
+                    intent.putExtra("order_payment_method", paymentMethodName);
+                    intent.putExtra("is_cod_payment", isCod);
+                    intent.putExtra("order_total", totalFinal + currentShippingFee);
                     startActivity(intent);
                     finish();
                 } else {

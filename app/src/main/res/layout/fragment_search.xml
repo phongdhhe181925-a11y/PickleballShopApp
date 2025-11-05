@@ -74,6 +74,46 @@
             android:clickable="true"
             android:focusable="true" />
     </LinearLayout>
+    
+    <!-- Quick category shortcuts below the search box -->
+    <LinearLayout
+        android:id="@+id/quickCategoryRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/quickCatRackets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vợt Pickleball"
+            android:textColor="@android:color/black"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+
+        <TextView
+            android:id="@+id/quickCatShoes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giày Pickleball"
+            android:textColor="@android:color/black"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+
+        <TextView
+            android:id="@+id/quickCatBalls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bóng Pickleball"
+            android:textColor="@android:color/black"
+            android:textStyle="normal"
+            android:textSize="16sp"
+            android:paddingVertical="8dp" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/searchResultsLabelContainer"
         android:layout_width="match_parent"

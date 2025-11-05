@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="100.000 VND"
-            android:textColor="#444"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:layout_marginTop="1dp"/>
 
@@ -110,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Xóa"
-            android:textColor="#555555"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:textStyle="bold"
             android:layout_alignParentEnd="true"

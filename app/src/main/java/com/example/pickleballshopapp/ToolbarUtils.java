@@ -26,6 +26,8 @@ public final class ToolbarUtils {
 
         if (logo != null) {
             logo.setOnClickListener(v -> {
+                // Dọn sạch back stack fragment (nếu có overlay như Cart/Search)
+                activity.getSupportFragmentManager().popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 Intent intent = new Intent(activity, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 activity.startActivity(intent);
@@ -68,14 +70,15 @@ public final class ToolbarUtils {
         View container = activity.findViewById(R.id.overlay_container);
         if (container != null) {
             Fragment existingFragment = activity.getSupportFragmentManager().findFragmentById(R.id.overlay_container);
-            if (existingFragment != null && existingFragment.getClass().equals(fragment.getClass())) {
-                return; 
+            if (existingFragment != null) {
+                // ĐÃ có overlay → không cho mở thêm fragment khác cho đến khi đóng overlay hiện tại
+                return;
             }
-
+            // Hiển thị container trước khi add fragment
+            container.setVisibility(View.VISIBLE);
             activity.getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(R.anim.slide_in_right, 0, 0, R.anim.slide_out_right)
                     .add(R.id.overlay_container, fragment)
-                    .addToBackStack(null) 
                     .commit();
         } else {
             String tag = (fragment instanceof SearchFragment) ? "SEARCH" : (fragment instanceof CartFragment) ? "CART" : null;

@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tổng phụ"
                     android:textSize="20sp"
+                    android:textColor="@android:color/black"
                     android:layout_alignParentStart="true"/>
 
                 <TextView
@@ -79,6 +80,7 @@
                     android:text="0₫"
                     android:textStyle="bold"
                     android:textSize="26sp"
+                    android:textColor="@android:color/black"
                     android:layout_alignParentEnd="true" />
 
             </RelativeLayout>

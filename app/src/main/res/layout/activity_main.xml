@@ -39,6 +39,8 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
+    
+
     <include
         layout="@layout/drawer_recycler"
         android:layout_gravity="start" />

@@ -68,6 +68,204 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"/>
 
+        <!-- Empty-state suggestions: 2 lines + 3 category buttons -->
+        <LinearLayout
+            android:id="@+id/emptySuggestionsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/fragmentEmptyCartText"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/emptySuggestTitle1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bạn không biết bắt đầu từ đâu?"
+                android:textColor="@android:color/black"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/emptySuggestTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thử xem những sản phẩm sau đây nhé"
+                android:textColor="@android:color/black"
+                android:textStyle="normal"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp">
+
+                <!-- Racket button (70% width using spacers) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp"
+                    android:weightSum="1">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+
+                    <LinearLayout
+                        android:id="@+id/btnSuggestRacket"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="0.75"
+                        android:background="#EEEEEE"
+                        android:paddingHorizontal="12dp"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iconSuggestRacket"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Vợt" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Vợt Pickleball"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:contentDescription=">" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+                </LinearLayout>
+
+                <!-- Shoes button (70% width using spacers) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp"
+                    android:weightSum="1">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+
+                    <LinearLayout
+                        android:id="@+id/btnSuggestShoes"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="0.75"
+                        android:background="#EEEEEE"
+                        android:paddingHorizontal="12dp"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iconSuggestShoes"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Giày" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Giày Pickleball"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:contentDescription=">" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+                </LinearLayout>
+
+                <!-- Balls button (70% width using spacers) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:weightSum="1">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+
+                    <LinearLayout
+                        android:id="@+id/btnSuggestBalls"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="0.75"
+                        android:background="#EEEEEE"
+                        android:paddingHorizontal="12dp"
+                        android:gravity="center_vertical"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iconSuggestBalls"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="Bóng" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Bóng Pickleball"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_right"
+                            android:contentDescription=">" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.125" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/fragmentBottomContainer"
             android:layout_width="match_parent"

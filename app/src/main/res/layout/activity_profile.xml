@@ -128,7 +128,7 @@
                         android:id="@+id/btnSaveProfile"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:backgroundTint="#1976D2"
+                        android:backgroundTint="@android:color/black"
                         android:text="Lưu thay đổi"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
@@ -157,14 +157,14 @@
                         android:textAllCaps="false"
                         android:textColor="@android:color/black"
                         android:textSize="15sp"
-                        android:backgroundTint="#F5F5F5"
+                        android:backgroundTint="#E0E0E0"
                         android:layout_marginBottom="12dp" />
 
                     <Button
                         android:id="@+id/btnLogout"
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
-                        android:backgroundTint="#D32F2F"
+                        android:backgroundTint="#B71C1C"
                         android:text="Đăng xuất"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"

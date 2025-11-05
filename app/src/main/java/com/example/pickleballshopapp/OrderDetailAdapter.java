@@ -38,6 +38,14 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         holder.tvProductName.setText(d.getProduct_name());
         holder.tvQuantity.setText("x" + d.getQuantity());
         holder.tvPrice.setText(String.format("%,.0f đ", d.getSubtotal()));
+        
+        // Hiển thị options value nếu có
+        if (d.getSelected_options_text() != null && !d.getSelected_options_text().trim().isEmpty()) {
+            holder.tvSelectedOptions.setText(d.getSelected_options_text());
+            holder.tvSelectedOptions.setVisibility(android.view.View.VISIBLE);
+        } else {
+            holder.tvSelectedOptions.setVisibility(android.view.View.GONE);
+        }
     }
 
     @Override
@@ -46,16 +54,18 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView tvProductName, tvQuantity, tvPrice;
+        TextView tvProductName, tvQuantity, tvPrice, tvSelectedOptions;
 
         VH(@NonNull View itemView) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tvProductName);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvSelectedOptions = itemView.findViewById(R.id.tvSelectedOptions);
         }
     }
 }
+
 
 
 

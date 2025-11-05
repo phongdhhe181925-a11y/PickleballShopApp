@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,10 @@ public class SearchFragment extends Fragment {
     private TextView searchEmptyHint1;
     private TextView searchEmptyHint2;
     private ProgressBar searchProgressBar;
+    private TextView quickCatRackets;
+    private TextView quickCatShoes;
+    private TextView quickCatBalls;
+    private LinearLayout quickCategoryRow;
     
     private SearchProductAdapter searchAdapter;
     private Handler searchHandler = new Handler(Looper.getMainLooper());
@@ -72,15 +77,26 @@ public class SearchFragment extends Fragment {
         searchEmptyHint1 = view.findViewById(R.id.searchEmptyHint1);
         searchEmptyHint2 = view.findViewById(R.id.searchEmptyHint2);
         searchProgressBar = view.findViewById(R.id.searchProgressBar);
+        quickCatRackets = view.findViewById(R.id.quickCatRackets);
+        quickCatShoes = view.findViewById(R.id.quickCatShoes);
+        quickCatBalls = view.findViewById(R.id.quickCatBalls);
+        quickCategoryRow = view.findViewById(R.id.quickCategoryRow);
 
         // Setup RecyclerView với LinearLayoutManager (vertical) - mỗi sản phẩm 1 dòng
         searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         searchResultsRecyclerView.setHasFixedSize(true);
 
-        // Handle Close button click
+        // Handle Close button click – remove trực tiếp với hiệu ứng trượt ra
         closeButton.setOnClickListener(v -> {
             if (getActivity() != null) {
-                getActivity().getSupportFragmentManager().popBackStack();
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(0, R.anim.slide_out_right, 0, 0)
+                        .remove(this)
+                        .commitAllowingStateLoss();
+                getParentFragmentManager().executePendingTransactions();
+                View oc = getActivity().findViewById(R.id.overlay_container);
+                if (oc != null) oc.postDelayed(() -> oc.setVisibility(View.GONE), 250);
             }
         });
 
@@ -105,12 +121,16 @@ public class SearchFragment extends Fragment {
                 }
                 
                 if (newText.length() >= 2) {
+                    // Khi bắt đầu tìm, ẩn gợi ý nhanh
+                    if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.GONE);
                     // Delay 500ms để tránh search quá nhiều khi user đang gõ
                     searchRunnable = () -> performSearch(newText);
                     searchHandler.postDelayed(searchRunnable, 500);
                 } else if (newText.isEmpty()) {
                     // Xóa kết quả khi user xóa text
                     clearSearchResults();
+                    // Hiển thị lại gợi ý nhanh khi không có từ khóa
+                    if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
@@ -128,6 +148,23 @@ public class SearchFragment extends Fragment {
         // Focus vào search view khi mở
         searchView.setFocusable(true);
         searchView.requestFocus();
+
+        // Quick category open handlers
+        View.OnClickListener openCategory = v -> {
+            String category = null;
+            int id = v.getId();
+            if (id == R.id.quickCatRackets) category = "racket";
+            else if (id == R.id.quickCatShoes) category = "shoes";
+            else if (id == R.id.quickCatBalls) category = "balls";
+            if (category != null) {
+                Intent i = new Intent(requireContext(), ProductListActivity.class);
+                i.putExtra("category", category);
+                startActivity(i);
+            }
+        };
+        if (quickCatRackets != null) quickCatRackets.setOnClickListener(openCategory);
+        if (quickCatShoes != null) quickCatShoes.setOnClickListener(openCategory);
+        if (quickCatBalls != null) quickCatBalls.setOnClickListener(openCategory);
     }
     
     private void performSearch(String keyword) {
@@ -171,18 +208,21 @@ public class SearchFragment extends Fragment {
                         searchResultsLabelContainer.setVisibility(View.VISIBLE);
                         
                         searchEmptyContainer.setVisibility(View.GONE);
+                        if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.GONE);
                     } else {
                         // Không có kết quả
                         searchResultsRecyclerView.setVisibility(View.GONE);
                         searchResultsLabelContainer.setVisibility(View.GONE);
                         searchEmptyTitle2.setText("nào cho \"" + searchKeyword + "\".");
                         searchEmptyContainer.setVisibility(View.VISIBLE);
+                        if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.GONE);
                     }
                 } else {
                     searchResultsRecyclerView.setVisibility(View.GONE);
                     searchResultsLabelContainer.setVisibility(View.GONE);
                     searchEmptyTitle2.setText("nào cho \"\".");
                     searchEmptyContainer.setVisibility(View.VISIBLE);
+                    if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.GONE);
                 }
             }
 
@@ -197,6 +237,7 @@ public class SearchFragment extends Fragment {
                 searchResultsLabelContainer.setVisibility(View.GONE);
                 searchEmptyTitle2.setText("nào cho \"\".");
                 searchEmptyContainer.setVisibility(View.VISIBLE);
+                if (quickCategoryRow != null) quickCategoryRow.setVisibility(View.GONE);
                 
                 Log.e("SearchFragment", "Error searching products: " + t.getMessage());
             }
