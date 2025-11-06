@@ -26,19 +26,32 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.topAppBar);
-        ToolbarUtils.setupCommonToolbar(this, toolbar);
+        // Hiện nút Back (mũi tên) và tiêu đề nếu dùng ActionBar mặc định
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Đăng nhập");
+        }
 
-// 1. Ánh xạ nút "Đăng ký ngay"
-// (Bấm Alt+Enter vào "TextView" và "Intent" để import class)
+// 1. Ánh xạ các TextView
         TextView tvGoToRegister = findViewById(R.id.tvGoToRegister);
+        TextView tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
-// 2. Xử lý khi bấm vào text
+// 2. Xử lý khi bấm vào "Đăng ký ngay"
         tvGoToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Mở màn hình Đăng ký
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+// 3. Xử lý khi bấm vào "Quên mật khẩu"
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Mở màn hình Quên mật khẩu
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -86,10 +99,10 @@ public class LoginActivity extends AppCompatActivity {
 
 // Lấy thông tin user
                         User user = response.body().getData();
-                        String userName = user.getFullName();
                         String userId = user.getUserId();
-                        String userEmail = user.getEmail() != null ? user.getEmail() : "";
-                        String userPhone = user.getPhone() != null ? user.getPhone() : "";
+                        String userName = user.getFullName();
+                        String userEmail = user.getEmail();
+                        String userPhone = user.getPhone();
 
 // === BƯỚC 2: LƯU PHIÊN ĐĂNG NHẬP ===
 // Khởi tạo SessionManager
@@ -119,8 +132,16 @@ public class LoginActivity extends AppCompatActivity {
     }
     // ===============================================
     @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        // Menu is provided by toolbar_common via app:menu
-        return true;
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        // Xử lý khi bấm nút Back (mũi tên)
+        if (item.getItemId() == android.R.id.home) {
+            // Quay về MainActivity, xóa các activity trên cùng
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish(); // Đóng LoginActivity
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

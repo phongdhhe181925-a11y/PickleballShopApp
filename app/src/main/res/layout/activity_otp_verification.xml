@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".OtpVerificationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,68 +22,60 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:text="Tạo Tài Khoản"
+                android:layout_marginBottom="8dp"
+                android:text="Xác thực OTP"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/etRegisterFullName"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@android:drawable/edit_text"
-                android:hint="Họ và tên"
-                android:inputType="textPersonName"
-                android:padding="16dp" />
+                android:layout_marginBottom="24dp"
+                android:text="Nhập mã OTP đã được gửi đến email của bạn"
+                android:textAlignment="center"
+                android:textColor="#666"
+                android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/etRegisterEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@android:drawable/edit_text"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:padding="16dp" />
-
-            <EditText
-                android:id="@+id/etRegisterPassword"
+                android:id="@+id/etOtpCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 android:background="@android:drawable/edit_text"
-                android:hint="Mật khẩu"
-                android:inputType="textPassword"
-                android:padding="16dp" />
+                android:hint="Nhập mã OTP (6 chữ số)"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="16dp"
+                android:textAlignment="center"
+                android:textSize="24sp" />
 
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btnVerifyOtp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/black"
                 android:padding="16dp"
-                android:text="Đăng Ký"
+                android:text="Xác thực"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/tvGoToLogin"
+                android:id="@+id/tvResendOtp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Đã có tài khoản? Đăng nhập"
+                android:text="Gửi lại mã OTP"
                 android:textColor="@android:color/black" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Container for overlay fragments -->
     <FrameLayout
         android:id="@+id/overlay_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 </FrameLayout>
+

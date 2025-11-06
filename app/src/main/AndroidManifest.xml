@@ -26,6 +26,22 @@
             android:theme="@style/Theme.PickleballKing"
             />
         <activity
+            android:name=".OtpVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PickleballKing" />
+        <activity
+            android:name=".CompleteRegisterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PickleballKing" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PickleballKing" />
+        <activity
+            android:name=".ResetPasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.PickleballKing" />
+        <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity

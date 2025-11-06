@@ -21,6 +21,8 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private Button btnRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,28 +40,40 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etFullName = findViewById(R.id.etRegisterFullName);
         EditText etEmail = findViewById(R.id.etRegisterEmail);
         EditText etPassword = findViewById(R.id.etRegisterPassword);
-        Button btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
 
 // 4. Xử lý khi bấm nút "Đăng Ký"
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Lấy text từ các ô nhập liệu
+                // Lấy dữ liệu
                 String fullName = etFullName.getText().toString().trim();
                 String email = etEmail.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                // 5. Kiểm tra dữ liệu (đơn giản)
-                if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                    return; // Dừng lại nếu có ô trống
+                // 5. Kiểm tra dữ liệu
+                if (fullName.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập họ và tên", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
-                // 6. Tạo "gói hàng" (Request) để gửi đi
-                RegisterRequest registerRequest = new RegisterRequest(fullName, email, password);
+                if (email.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // 7. Gọi API
-                callRegisterApi(registerRequest);
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    Toast.makeText(RegisterActivity.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password.isEmpty() || password.length() < 6) {
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 6. Gửi OTP để xác thực email (lưu tạm fullName và password)
+                sendOtpForRegistration(email, fullName, password);
             }
         });
 
@@ -73,41 +87,45 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    // === DÁN HÀM MỚI NÀY VÀO BÊN NGOÀI onCreate ===
+    // === HÀM GỬI OTP CHO ĐĂNG KÝ ===
 
-    private void callRegisterApi(RegisterRequest registerRequest) {
-        // (Bấm Alt+Enter để import 'Log', 'Call', 'Callback', 'Response', 'RetrofitClient')
+    private void sendOtpForRegistration(String email, String fullName, String password) {
+        btnRegister.setEnabled(false);
+        btnRegister.setText("Đang gửi...");
 
-        // Lấy ApiService từ RetrofitClient
         ApiService apiService = RetrofitClient.getApiService();
+        SendOtpRequest request = new SendOtpRequest(email, "verify_email");
+        Call<SendOtpResponse> call = apiService.sendOtp(request);
 
-        // Gọi API registerUser
-        Call<AuthResponse> call = apiService.registerUser(registerRequest);
-
-        call.enqueue(new Callback<AuthResponse>() {
+        call.enqueue(new Callback<SendOtpResponse>() {
             @Override
-            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
+            public void onResponse(Call<SendOtpResponse> call, Response<SendOtpResponse> response) {
+                btnRegister.setEnabled(true);
+                btnRegister.setText("Đăng Ký");
 
                 if (response.isSuccessful() && response.body() != null) {
-                    // Nếu API trả về thành công (success: true)
                     if (response.body().isSuccess()) {
-                        Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-
-                        // Đăng ký xong, đóng màn hình này và quay lại Đăng nhập
+                        // Chuyển sang màn hình xác thực OTP (truyền kèm fullName và password)
+                        Intent intent = new Intent(RegisterActivity.this, OtpVerificationActivity.class);
+                        intent.putExtra("user_id", response.body().getUserId());
+                        intent.putExtra("purpose", "verify_email");
+                        intent.putExtra("email", email);
+                        intent.putExtra("full_name", fullName);
+                        intent.putExtra("password", password);
+                        startActivity(intent);
                         finish();
                     } else {
-                        // Nếu API trả về thất bại (success: false, vd: email đã tồn tại)
                         Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    // Nếu server trả về lỗi (ví dụ: 404, 500)
                     Toast.makeText(RegisterActivity.this, "Lỗi server: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<AuthResponse> call, Throwable t) {
-                // Nếu lỗi kết nối (ví dụ: mất mạng, sai BASE_URL)
+            public void onFailure(Call<SendOtpResponse> call, Throwable t) {
+                btnRegister.setEnabled(true);
+                btnRegister.setText("Đăng Ký");
                 Toast.makeText(RegisterActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("API_FAILURE", "Lỗi: " + t.getMessage());
             }

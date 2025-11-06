@@ -36,6 +36,9 @@ public class ProfileActivity extends AppCompatActivity {
         etEmail.setText(sessionManager.getEmail());
         etPhone.setText(sessionManager.getPhone());
 
+        // Realtime validation: nếu nhập quá 10 chữ số thì xóa và báo lỗi ngay
+        attachPhoneWatcher(etPhone);
+
         btnSave.setOnClickListener(v -> {
             String newName = etFullName.getText().toString().trim();
             String newEmail = etEmail.getText().toString().trim();
@@ -134,6 +137,32 @@ public class ProfileActivity extends AppCompatActivity {
         String cleanPhone = phone.trim().replaceAll("[^0-9]", "");
         // Kiểm tra: bắt đầu bằng 09 và đúng 10 chữ số
         return cleanPhone.length() == 10 && cleanPhone.startsWith("09");
+    }
+
+    private void attachPhoneWatcher(EditText etPhone) {
+        etPhone.addTextChangedListener(new android.text.TextWatcher() {
+            private boolean selfChange = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {
+                if (selfChange) return;
+                String clean = s.toString().trim().replaceAll("[^0-9]", "");
+                if (clean.length() > 10) {
+                    selfChange = true;
+                    etPhone.setText("");
+                    etPhone.setError("Số điện thoại không hợp lệ");
+                    Toast.makeText(ProfileActivity.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    etPhone.requestFocus();
+                    selfChange = false;
+                }
+            }
+        });
     }
 
     // This is no longer needed as ToolbarUtils handles navigation

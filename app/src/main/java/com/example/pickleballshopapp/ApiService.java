@@ -98,4 +98,17 @@ public interface ApiService {
     // Lấy brands theo category để hiển thị trong drawer
     @GET("get_brands.php")
     Call<BrandResponse> getBrandsByCategory(@Query("category_id") int categoryId);
+
+    // OTP APIs
+    @POST("send_otp.php")
+    Call<SendOtpResponse> sendOtp(@Body SendOtpRequest request);
+
+    @POST("verify_otp.php")
+    Call<BaseResponse> verifyOtp(@Body VerifyOtpRequest request);
+
+    @POST("register_with_otp.php")
+    Call<AuthResponse> registerWithOtp(@Body RegisterWithOtpRequest request);
+
+    @POST("reset_password_with_otp.php")
+    Call<BaseResponse> resetPasswordWithOtp(@Body ResetPasswordRequest request);
 }

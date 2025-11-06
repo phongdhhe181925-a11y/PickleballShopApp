@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".CompleteRegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,12 +23,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:text="Tạo Tài Khoản"
+                android:text="Hoàn tất đăng ký"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/etRegisterFullName"
+                android:id="@+id/etFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -38,52 +38,42 @@
                 android:padding="16dp" />
 
             <EditText
-                android:id="@+id/etRegisterEmail"
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@android:drawable/edit_text"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:padding="16dp" />
-
-            <EditText
-                android:id="@+id/etRegisterPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
                 android:background="@android:drawable/edit_text"
                 android:hint="Mật khẩu"
                 android:inputType="textPassword"
                 android:padding="16dp" />
 
+            <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@android:drawable/edit_text"
+                android:hint="Xác nhận mật khẩu"
+                android:inputType="textPassword"
+                android:padding="16dp" />
+
             <Button
-                android:id="@+id/btnRegister"
+                android:id="@+id/btnCompleteRegister"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/black"
                 android:padding="16dp"
-                android:text="Đăng Ký"
+                android:text="Hoàn tất đăng ký"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tvGoToLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Đã có tài khoản? Đăng nhập"
-                android:textColor="@android:color/black" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <!-- Container for overlay fragments -->
     <FrameLayout
         android:id="@+id/overlay_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 </FrameLayout>
+

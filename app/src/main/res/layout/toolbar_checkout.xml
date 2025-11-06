@@ -27,8 +27,8 @@
         <!-- Cart icon on the right -->
         <ImageView
             android:id="@+id/action_cart"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ic_shopping_cart"
             android:padding="8dp"
             android:tint="@android:color/white"

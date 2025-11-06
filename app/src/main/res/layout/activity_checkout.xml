@@ -62,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:hint="Nhập số điện thoại (09xxxxxxxx)"
                     android:inputType="phone"
-                    android:maxLength="10"
                     android:background="@drawable/edittext_box"
                     android:layout_marginTop="8dp"
                     android:minHeight="48dp"/>

@@ -74,6 +74,9 @@ public class CheckoutActivity extends AppCompatActivity {
         tvShippingRight = findViewById(R.id.tvShippingRight);
         tvTotal = findViewById(R.id.tvOrderTotal);
         Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
+
+        // Realtime validation: nếu nhập quá 10 chữ số thì xóa và báo lỗi ngay
+        attachPhoneWatcher(etPhone);
         
         // Ánh xạ RadioGroup và RadioButtons
         rgShippingMethod = findViewById(R.id.rgShippingMethod);
@@ -587,6 +590,32 @@ public class CheckoutActivity extends AppCompatActivity {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    private void attachPhoneWatcher(EditText etPhone) {
+        etPhone.addTextChangedListener(new android.text.TextWatcher() {
+            private boolean selfChange = false;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+            @Override
+            public void afterTextChanged(android.text.Editable s) {
+                if (selfChange) return;
+                String clean = s.toString().trim().replaceAll("[^0-9]", "");
+                if (clean.length() > 10) {
+                    selfChange = true;
+                    etPhone.setText("");
+                    etPhone.setError("Số điện thoại không hợp lệ");
+                    Toast.makeText(CheckoutActivity.this, "Số điện thoại không hợp lệ", Toast.LENGTH_SHORT).show();
+                    etPhone.requestFocus();
+                    selfChange = false;
+                }
+            }
+        });
     }
 
     @Override
