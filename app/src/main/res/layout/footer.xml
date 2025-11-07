@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/footer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#000000"
+    android:padding="20dp">
+
+    <!-- Box Danh mục -->
+    <LinearLayout
+        android:id="@+id/footerCategoryBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:id="@+id/footerCategoryHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Danh mục"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/footerCategoryArrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/footerCategoryContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/footerCategoryRacket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vợt Pickleball"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/footerCategoryShoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giày Pickleball"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/footerCategoryBalls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bóng Pickleball"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Box Địa chỉ -->
+    <LinearLayout
+        android:id="@+id/footerAddressBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:id="@+id/footerAddressHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Địa chỉ"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/footerAddressArrow"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_arrow_down"
+                android:tint="#FFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/footerAddressContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ginza 銀座 Chuo City, Tokyo 104-0061 Japan"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Mon - Fri: 6:00 - 23:00"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Sat - Sun: 12:00 - 18:00"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="2dp"
+                android:paddingBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kho hàng: Futamicho Okubo, Iyo, Ehime 799-3311, Japan"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="4dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Mon - Fri: 6:00 - 23:00"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Sat: 12:00 - 18:00"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="• Sun: Offline"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:paddingVertical="2dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Link text tĩnh -->
+    <TextView
+        android:id="@+id/footerHotline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hotline: 0969696969"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:paddingVertical="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/footerZalo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PickleballKing Official on Zalo"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:paddingVertical="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground" />
+
+    <TextView
+        android:id="@+id/footerEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pickleballkingvn@gmail.com"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:paddingVertical="6dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground" />
+
+    <!-- Đường kẻ mỏng màu xám -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#666666"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/footerLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_logo_dark"
+        android:adjustViewBounds="true"
+        android:paddingVertical="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground" />
+
+    <!-- Social icons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/footerFacebook"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_facebook"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="12dp" />
+
+        <ImageView
+            android:id="@+id/footerInstagram"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_instagram"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="12dp" />
+
+        <ImageView
+            android:id="@+id/footerTiktok"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_tiktok"
+            android:padding="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground" />
+    </LinearLayout>
+
+    <!-- Copyright -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="© 2025 PickleballKing Việt Nam.\nBản quyền thuộc về PickleballKing Vietnam"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:gravity="center"
+        android:textAlignment="center" />
+
+</LinearLayout>
+

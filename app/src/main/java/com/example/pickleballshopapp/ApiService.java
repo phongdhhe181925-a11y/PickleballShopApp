@@ -79,6 +79,14 @@ public interface ApiService {
     @GET("get_best_seller.php")
     Call<ProductResponse> getBestSeller();
 
+    // API Lấy tất cả New Arrival (không giới hạn)
+    @GET("get_all_new_arrival.php")
+    Call<ProductResponse> getAllNewArrival();
+
+    // API Lấy tất cả Best Seller (không giới hạn)
+    @GET("get_all_best_seller.php")
+    Call<ProductResponse> getAllBestSeller();
+
     // API Tìm kiếm sản phẩm
     @GET("search_products.php")
     Call<ProductResponse> searchProducts(@Query("keyword") String keyword);

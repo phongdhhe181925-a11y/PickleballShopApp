@@ -27,94 +27,110 @@
             android:layout_marginTop="18dp"
             android:layout_marginBottom="12dp" />
 
-        <FrameLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cartRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="8dp" />
-
-            <TextView
-                android:id="@+id/emptyCartText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Giỏ hàng của bạn hiện đang trống."
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/black"
-                android:visibility="gone" />
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/totalAndCheckoutContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/light_gray_background"
-            android:padding="16dp">
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="3dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvCartTotal"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cartRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:nestedScrollingEnabled="false" />
+
+                    <TextView
+                        android:id="@+id/emptyCartText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="400dp"
+                        android:gravity="center"
+                        android:text="Giỏ hàng của bạn hiện đang trống."
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:visibility="gone" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/totalAndCheckoutContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tổng phụ"
-                    android:textSize="20sp"
-                    android:textColor="@android:color/black"
-                    android:layout_alignParentStart="true"/>
+                    android:orientation="vertical"
+                    android:background="@color/light_gray_background"
+                    android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/tvCartPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0₫"
-                    android:textStyle="bold"
-                    android:textSize="26sp"
-                    android:textColor="@android:color/black"
-                    android:layout_alignParentEnd="true" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="3dp">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvCartTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tổng phụ"
+                            android:textSize="20sp"
+                            android:textColor="@android:color/black"
+                            android:layout_alignParentStart="true"/>
 
-            <!-- Đường kẻ mỏng màu xám, canh lề theo padding container -->
-            <View
-                android:id="@+id/cartDivider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0"
-                android:layout_marginTop="3dp"/>
+                        <TextView
+                            android:id="@+id/tvCartPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0₫"
+                            android:textStyle="bold"
+                            android:textSize="26sp"
+                            android:textColor="@android:color/black"
+                            android:layout_alignParentEnd="true" />
 
-            <!-- Ghi chú phí vận chuyển dưới đường kẻ, màu xám nhạt -->
-            <TextView
-                android:id="@+id/tvCartShippingNote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Phí vận chuyển sẽ được tính ở bước tiếp theo."
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"/>
+                    </RelativeLayout>
 
-            <Button
-                android:id="@+id/checkoutButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/black"
-                android:padding="16dp"
-                android:text="Thanh toán"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
-        </LinearLayout>
+                    <!-- Đường kẻ mỏng màu xám, canh lề theo padding container -->
+                    <View
+                        android:id="@+id/cartDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E0E0E0"
+                        android:layout_marginTop="3dp"/>
+
+                    <!-- Ghi chú phí vận chuyển dưới đường kẻ, màu xám nhạt -->
+                    <TextView
+                        android:id="@+id/tvCartShippingNote"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Phí vận chuyển sẽ được tính ở bước tiếp theo."
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"/>
+
+                    <Button
+                        android:id="@+id/checkoutButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/black"
+                        android:padding="16dp"
+                        android:text="Thanh toán"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <include layout="@layout/footer" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

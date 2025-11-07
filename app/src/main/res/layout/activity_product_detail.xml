@@ -253,6 +253,9 @@
                     android:visibility="gone"
                     tools:text="Thông số kỹ thuật chi tiết..." />
 
+                <!-- Footer -->
+                <include layout="@layout/footer" />
+
         </LinearLayout>
     </ScrollView>
 

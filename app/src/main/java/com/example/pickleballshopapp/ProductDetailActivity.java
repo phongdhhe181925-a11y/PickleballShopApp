@@ -65,6 +65,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.topAppBar);
         ToolbarUtils.setupCommonToolbar(this, toolbar);
 
+        // Setup footer
+        View footerView = findViewById(R.id.footer);
+        if (footerView != null) {
+            new FooterHelper(this, footerView);
+        }
+
         // Ánh xạ views
         detailMainImageView = findViewById(R.id.detailMainImageView);
         btnPrevImage = findViewById(R.id.btnPrevImage);

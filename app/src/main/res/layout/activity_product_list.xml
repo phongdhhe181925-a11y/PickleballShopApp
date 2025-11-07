@@ -12,15 +12,31 @@
 
         <include layout="@layout/toolbar_common" />
 
-        <include layout="@layout/view_product_list_header" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productRecyclerView"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            tools:listitem="@layout/item_product" />
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/view_product_list_header" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_product" />
+
+                <include layout="@layout/footer" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

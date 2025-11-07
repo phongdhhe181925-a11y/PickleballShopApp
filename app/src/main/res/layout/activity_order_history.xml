@@ -7,6 +7,18 @@
 
     <include layout="@layout/toolbar_common" />
 
+    <TextView
+        android:id="@+id/tvOrderHistoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lịch sử đơn hàng"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -23,7 +35,18 @@
         android:layout_weight="1"
         android:padding="12dp" />
 
+    <TextView
+        android:id="@+id/tvEmptyOrders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Bạn chưa có đơn hàng nào."
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
 </LinearLayout>
+
 
 
 

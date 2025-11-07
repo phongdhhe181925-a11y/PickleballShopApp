@@ -25,6 +25,7 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private OrderHistoryAdapter adapter;
+    private android.widget.TextView tvEmptyOrders;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
 
         recyclerView = findViewById(R.id.rvOrders);
         progressBar = findViewById(R.id.progressBar);
+        tvEmptyOrders = findViewById(R.id.tvEmptyOrders);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new OrderHistoryAdapter(new ArrayList<>(), this);
@@ -68,8 +70,19 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
                 if (body != null && body.isSuccess()) {
                     List<OrderDto> orders = body.getData();
                     adapter.updateData(orders);
+                    
+                    // Hiển thị/ẩn thông báo khi không có đơn hàng
+                    if (orders == null || orders.isEmpty()) {
+                        tvEmptyOrders.setVisibility(View.VISIBLE);
+                        recyclerView.setVisibility(View.GONE);
+                    } else {
+                        tvEmptyOrders.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     Toast.makeText(OrderHistoryActivity.this, "Không tải được đơn hàng", Toast.LENGTH_SHORT).show();
+                    tvEmptyOrders.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
                 }
             }
 
@@ -77,6 +90,8 @@ public class OrderHistoryActivity extends AppCompatActivity implements OrderHist
             public void onFailure(Call<OrdersResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(OrderHistoryActivity.this, "Lỗi mạng", Toast.LENGTH_SHORT).show();
+                tvEmptyOrders.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
             }
         });
     }

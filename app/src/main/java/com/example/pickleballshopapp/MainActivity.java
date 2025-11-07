@@ -13,10 +13,17 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.navigation.NavigationView;
+import java.util.ArrayList;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
+    private DrawerAdapter drawerAdapter;
+    private final List<DrawerAdapter.Group> drawerGroups = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         androidx.recyclerview.widget.RecyclerView drawerRecycler = findViewById(R.id.drawerRecyclerView);
-        DrawerAdapter adapter = new DrawerAdapter(this, new DrawerAdapter.Callback() {
+        drawerAdapter = new DrawerAdapter(this, new DrawerAdapter.Callback() {
             @Override
             public void onOpenAll(String category) {
                 Intent i = new Intent(MainActivity.this, ProductListActivity.class);
@@ -62,26 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
-        drawerRecycler.setAdapter(adapter);
+        drawerRecycler.setAdapter(drawerAdapter);
         drawerRecycler.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this));
 
-        // Build groups with placeholder brands for now
-        java.util.List<DrawerAdapter.Group> groups = new java.util.ArrayList<>();
-        DrawerAdapter.Group rackets = new DrawerAdapter.Group("Vợt Pickleball", "racket", false);
-        rackets.children.add(new DrawerAdapter.Child("Xem tất cả Vợt", "racket", true, 0));
-        rackets.children.add(new DrawerAdapter.Child("CRBN", "racket", false, 4));
-        groups.add(rackets);
-
-        DrawerAdapter.Group shoes = new DrawerAdapter.Group("Giày Pickleball", "shoes", false);
-        shoes.children.add(new DrawerAdapter.Child("Xem tất cả Giày", "shoes", true, 0));
-        shoes.children.add(new DrawerAdapter.Child("ASICS", "shoes", false, 7));
-        shoes.children.add(new DrawerAdapter.Child("BABOLAT", "shoes", false, 8));
-        groups.add(shoes);
-
-        DrawerAdapter.Group balls = new DrawerAdapter.Group("Bóng Pickleball", "balls", false);
-        groups.add(balls);
-
-        adapter.setData(groups);
+        setupDrawerSkeleton();
+        fetchBrandsForCategory("racket", 1);
+        fetchBrandsForCategory("shoes", 3);
 
         View toolbarLogo = findViewById(R.id.toolbar_logo);
         toolbarLogo.setOnClickListener(v -> {
@@ -104,6 +97,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // Handle intent on initial creation
         handleIntent(getIntent());
+    }
+
+    private void setupDrawerSkeleton() {
+        drawerGroups.clear();
+
+        DrawerAdapter.Group rackets = new DrawerAdapter.Group("Vợt Pickleball", "racket", false);
+        rackets.children.add(new DrawerAdapter.Child("Xem tất cả Vợt", "racket", true, 0));
+        drawerGroups.add(rackets);
+
+        DrawerAdapter.Group shoes = new DrawerAdapter.Group("Giày Pickleball", "shoes", false);
+        shoes.children.add(new DrawerAdapter.Child("Xem tất cả Giày", "shoes", true, 0));
+        drawerGroups.add(shoes);
+
+        DrawerAdapter.Group balls = new DrawerAdapter.Group("Bóng Pickleball", "balls", false);
+        drawerGroups.add(balls);
+
+        drawerAdapter.setData(drawerGroups);
+    }
+
+    private void fetchBrandsForCategory(String categoryKey, int categoryId) {
+        ApiClient.getApiService().getBrandsByCategory(categoryId)
+                .enqueue(new Callback<BrandResponse>() {
+                    @Override
+                    public void onResponse(Call<BrandResponse> call, Response<BrandResponse> response) {
+                        if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                            java.util.List<BrandResponse.BrandSimple> brandList = response.body().getData();
+                            if (brandList == null || brandList.isEmpty()) {
+                                return;
+                            }
+
+                            runOnUiThread(() -> {
+                                for (DrawerAdapter.Group group : drawerGroups) {
+                                    if (group.category.equals(categoryKey)) {
+                                        java.util.List<DrawerAdapter.Child> preserved = new java.util.ArrayList<>();
+                                        for (DrawerAdapter.Child child : group.children) {
+                                            if (child.isAll) {
+                                                preserved.add(child);
+                                            }
+                                        }
+                                        group.children.clear();
+                                        group.children.addAll(preserved);
+                                        for (BrandResponse.BrandSimple brand : brandList) {
+                                            group.children.add(new DrawerAdapter.Child(brand.name, categoryKey, false, brand.id));
+                                        }
+                                        break;
+                                    }
+                                }
+                                drawerAdapter.setData(drawerGroups);
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<BrandResponse> call, Throwable t) {
+                        // Optional: handle error (log/toast)
+                    }
+                });
     }
 
     @Override

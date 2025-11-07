@@ -1,5 +1,6 @@
 package com.example.pickleballshopapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -49,6 +50,12 @@ public class HomeFragment extends Fragment {
     private ImageButton btnBallsPrev;
     private ImageButton btnBallsNext;
     
+    // Nút "Xem tất cả"
+    private android.widget.Button btnViewAllNewArrival;
+    private android.widget.Button btnViewAllBestSeller;
+    private android.widget.Button btnViewAllShoes;
+    private android.widget.Button btnViewAllBalls;
+    
     // Carousel variables
     private ViewPager2 carouselViewPager;
     private LinearLayout carouselIndicators;
@@ -71,6 +78,12 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Setup footer
+        View footerView = view.findViewById(R.id.footer);
+        if (footerView != null && getActivity() != null) {
+            new FooterHelper((androidx.appcompat.app.AppCompatActivity) getActivity(), footerView);
+        }
+
         // Ánh xạ views
         newArrivalRecyclerView = view.findViewById(R.id.newArrivalRecyclerView);
         bestSellerRecyclerView = view.findViewById(R.id.bestSellerRecyclerView);
@@ -85,6 +98,39 @@ public class HomeFragment extends Fragment {
         btnShoesNext = view.findViewById(R.id.btnShoesNext);
         btnBallsPrev = view.findViewById(R.id.btnBallsPrev);
         btnBallsNext = view.findViewById(R.id.btnBallsNext);
+        
+        // Ánh xạ nút "Xem tất cả"
+        btnViewAllNewArrival = view.findViewById(R.id.btnViewAllNewArrival);
+        btnViewAllBestSeller = view.findViewById(R.id.btnViewAllBestSeller);
+        btnViewAllShoes = view.findViewById(R.id.btnViewAllShoes);
+        btnViewAllBalls = view.findViewById(R.id.btnViewAllBalls);
+        
+        // Setup click cho nút "Xem tất cả"
+        btnViewAllNewArrival.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), ProductListActivity.class);
+            i.putExtra("category", "racket");
+            i.putExtra("filter", "new_arrival");
+            startActivity(i);
+        });
+        
+        btnViewAllBestSeller.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), ProductListActivity.class);
+            i.putExtra("category", "racket");
+            i.putExtra("filter", "best_seller");
+            startActivity(i);
+        });
+        
+        btnViewAllShoes.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), ProductListActivity.class);
+            i.putExtra("category", "shoes");
+            startActivity(i);
+        });
+        
+        btnViewAllBalls.setOnClickListener(v -> {
+            Intent i = new Intent(getActivity(), ProductListActivity.class);
+            i.putExtra("category", "balls");
+            startActivity(i);
+        });
         
         // Reset counter
         apiCompletedCount = 0;
@@ -165,9 +211,11 @@ public class HomeFragment extends Fragment {
                         newArrivalRecyclerView.setAdapter(newArrivalAdapter);
                         newArrivalRecyclerView.setVisibility(View.VISIBLE);
                         newArrivalLabel.setVisibility(View.VISIBLE);
+                        btnViewAllNewArrival.setVisibility(View.VISIBLE);
                     } else {
                         newArrivalRecyclerView.setVisibility(View.GONE);
                         newArrivalLabel.setVisibility(View.GONE);
+                        btnViewAllNewArrival.setVisibility(View.GONE);
                     }
                 } else {
                     newArrivalRecyclerView.setVisibility(View.GONE);
@@ -209,9 +257,11 @@ public class HomeFragment extends Fragment {
                         bestSellerRecyclerView.setAdapter(bestSellerAdapter);
                         bestSellerRecyclerView.setVisibility(View.VISIBLE);
                         bestSellerLabel.setVisibility(View.VISIBLE);
+                        btnViewAllBestSeller.setVisibility(View.VISIBLE);
                     } else {
                         bestSellerRecyclerView.setVisibility(View.GONE);
                         bestSellerLabel.setVisibility(View.GONE);
+                        btnViewAllBestSeller.setVisibility(View.GONE);
                     }
                 } else {
                     bestSellerRecyclerView.setVisibility(View.GONE);
@@ -377,10 +427,12 @@ public class HomeFragment extends Fragment {
                         shoesRecyclerView.setAdapter(shoesAdapter);
                         shoesRecyclerView.setVisibility(View.VISIBLE);
                         shoesLabel.setVisibility(View.VISIBLE);
+                        btnViewAllShoes.setVisibility(View.VISIBLE);
                         updateNavigationButtons(shoesRecyclerView, btnShoesPrev, btnShoesNext);
                     } else {
                         shoesRecyclerView.setVisibility(View.GONE);
                         shoesLabel.setVisibility(View.GONE);
+                        btnViewAllShoes.setVisibility(View.GONE);
                         btnShoesPrev.setVisibility(View.GONE);
                         btnShoesNext.setVisibility(View.GONE);
                     }
@@ -428,10 +480,12 @@ public class HomeFragment extends Fragment {
                         ballsRecyclerView.setAdapter(ballsAdapter);
                         ballsRecyclerView.setVisibility(View.VISIBLE);
                         ballsLabel.setVisibility(View.VISIBLE);
+                        btnViewAllBalls.setVisibility(View.VISIBLE);
                         updateNavigationButtons(ballsRecyclerView, btnBallsPrev, btnBallsNext);
                     } else {
                         ballsRecyclerView.setVisibility(View.GONE);
                         ballsLabel.setVisibility(View.GONE);
+                        btnViewAllBalls.setVisibility(View.GONE);
                         btnBallsPrev.setVisibility(View.GONE);
                         btnBallsNext.setVisibility(View.GONE);
                     }

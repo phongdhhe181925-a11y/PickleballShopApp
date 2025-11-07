@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.topAppBar);
         ToolbarUtils.setupCommonToolbar(this, toolbar);
+
 // 1. Ánh xạ nút "Đăng nhập"
 // (Bấm Alt+Enter vào "TextView" để import class)
         TextView tvGoToLogin = findViewById(R.id.tvGoToLogin);

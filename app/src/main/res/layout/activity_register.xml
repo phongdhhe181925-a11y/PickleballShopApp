@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:background="@android:drawable/edit_text"
-                android:hint="Họ và tên"
+                android:hint="Tên đầy đủ của bạn"
                 android:inputType="textPersonName"
                 android:padding="16dp" />
 

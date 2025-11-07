@@ -49,8 +49,6 @@
                 android:textColor="@android:color/black"
                 android:gravity="center"
                 android:minLines="2"
-                android:maxLines="2"
-                android:ellipsize="end"
                 tools:text="Vợt Pickleball Sypik Avatar Ultimate Pro Tour" />
 
             <TextView

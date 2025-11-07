@@ -110,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="New Arrival"
-            android:textSize="22sp"
+            android:textSize="27sp"
             android:textStyle="bold"
             android:paddingHorizontal="16dp"
             android:paddingTop="16dp"
@@ -118,11 +118,29 @@
             android:textColor="@android:color/black"
             android:visibility="gone" />
 
+        <Button
+            android:id="@+id/btnViewAllNewArrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="Xem tất cả"
+            android:textAllCaps="false"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:backgroundTint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newArrivalRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:nestedScrollingEnabled="false"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -132,12 +150,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Best Seller"
-            android:textSize="22sp"
+            android:textSize="27sp"
             android:textStyle="bold"
             android:paddingHorizontal="16dp"
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
             android:textColor="@android:color/black"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnViewAllBestSeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="Xem tất cả"
+            android:textAllCaps="false"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+            android:backgroundTint="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
             android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -159,12 +194,29 @@
                 android:id="@+id/shoesLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Giày"
-                android:textSize="22sp"
+                android:text="Giày Pickleball"
+                android:textSize="27sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="8dp"
                 android:textColor="@android:color/black"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnViewAllShoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Xem tất cả"
+                android:textAllCaps="false"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <RelativeLayout
@@ -220,11 +272,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Bóng thi đấu"
-                android:textSize="22sp"
+                android:textSize="27sp"
                 android:textStyle="bold"
                 android:paddingHorizontal="16dp"
                 android:paddingBottom="8dp"
                 android:textColor="@android:color/black"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnViewAllBalls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                android:text="Xem tất cả"
+                android:textAllCaps="false"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <RelativeLayout
@@ -267,6 +336,8 @@
 
             </RelativeLayout>
         </LinearLayout>
+
+        <include layout="@layout/footer" />
 
     </LinearLayout>
 </ScrollView>

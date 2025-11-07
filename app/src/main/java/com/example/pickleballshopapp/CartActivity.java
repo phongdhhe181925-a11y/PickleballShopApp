@@ -39,6 +39,12 @@ public class CartActivity extends AppCompatActivity {
             getSupportActionBar().setHomeButtonEnabled(false);
         }
 
+        // Setup footer
+        View footerView = findViewById(R.id.footer);
+        if (footerView != null) {
+            new FooterHelper(this, footerView);
+        }
+
 // Toolbar đã được cấu hình qua ToolbarUtils và không có nút back
 
         // 1. Ánh xạ View từ file activity_cart.xml...
