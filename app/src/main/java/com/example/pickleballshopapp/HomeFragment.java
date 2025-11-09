@@ -41,7 +41,9 @@ public class HomeFragment extends Fragment {
     
     private ProgressBar progressBar;
     private TextView newArrivalLabel;
+    private TextView newArrivalDescription;
     private TextView bestSellerLabel;
+    private TextView bestSellerDescription;
     private TextView shoesLabel;
     private TextView ballsLabel;
     
@@ -91,7 +93,9 @@ public class HomeFragment extends Fragment {
         ballsRecyclerView = view.findViewById(R.id.ballsRecyclerView);
         progressBar = view.findViewById(R.id.homeProgressBar);
         newArrivalLabel = view.findViewById(R.id.newArrivalLabel);
+        newArrivalDescription = view.findViewById(R.id.newArrivalDescription);
         bestSellerLabel = view.findViewById(R.id.bestSellerLabel);
+        bestSellerDescription = view.findViewById(R.id.bestSellerDescription);
         shoesLabel = view.findViewById(R.id.shoesLabel);
         ballsLabel = view.findViewById(R.id.ballsLabel);
         btnShoesPrev = view.findViewById(R.id.btnShoesPrev);
@@ -205,21 +209,24 @@ public class HomeFragment extends Fragment {
 
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     List<Product> productList = response.body().getData();
-                    
+
                     if (productList != null && !productList.isEmpty()) {
                         newArrivalAdapter = new ProductAdapter(requireContext(), productList);
                         newArrivalRecyclerView.setAdapter(newArrivalAdapter);
                         newArrivalRecyclerView.setVisibility(View.VISIBLE);
                         newArrivalLabel.setVisibility(View.VISIBLE);
+                        newArrivalDescription.setVisibility(View.VISIBLE);
                         btnViewAllNewArrival.setVisibility(View.VISIBLE);
                     } else {
                         newArrivalRecyclerView.setVisibility(View.GONE);
                         newArrivalLabel.setVisibility(View.GONE);
+                        newArrivalDescription.setVisibility(View.GONE);
                         btnViewAllNewArrival.setVisibility(View.GONE);
                     }
                 } else {
                     newArrivalRecyclerView.setVisibility(View.GONE);
                     newArrivalLabel.setVisibility(View.GONE);
+                    newArrivalDescription.setVisibility(View.GONE);
                 }
             }
 
@@ -232,6 +239,7 @@ public class HomeFragment extends Fragment {
                 Log.e("API_FAILURE", "Error fetching New Arrival: " + t.getMessage());
                 newArrivalRecyclerView.setVisibility(View.GONE);
                 newArrivalLabel.setVisibility(View.GONE);
+                newArrivalDescription.setVisibility(View.GONE);
             }
         });
     }
@@ -257,15 +265,18 @@ public class HomeFragment extends Fragment {
                         bestSellerRecyclerView.setAdapter(bestSellerAdapter);
                         bestSellerRecyclerView.setVisibility(View.VISIBLE);
                         bestSellerLabel.setVisibility(View.VISIBLE);
+                        bestSellerDescription.setVisibility(View.VISIBLE);
                         btnViewAllBestSeller.setVisibility(View.VISIBLE);
                     } else {
                         bestSellerRecyclerView.setVisibility(View.GONE);
                         bestSellerLabel.setVisibility(View.GONE);
+                        bestSellerDescription.setVisibility(View.GONE);
                         btnViewAllBestSeller.setVisibility(View.GONE);
                     }
                 } else {
                     bestSellerRecyclerView.setVisibility(View.GONE);
                     bestSellerLabel.setVisibility(View.GONE);
+                    bestSellerDescription.setVisibility(View.GONE);
                 }
             }
 
@@ -278,6 +289,7 @@ public class HomeFragment extends Fragment {
                 Log.e("API_FAILURE", "Error fetching Best Seller: " + t.getMessage());
                 bestSellerRecyclerView.setVisibility(View.GONE);
                 bestSellerLabel.setVisibility(View.GONE);
+                bestSellerDescription.setVisibility(View.GONE);
             }
         });
     }

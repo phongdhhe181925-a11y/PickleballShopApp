@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="12dp">
+        android:background="@drawable/footer_box_border"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp">
 
         <LinearLayout
             android:id="@+id/footerCategoryHeader"
@@ -97,7 +99,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="12dp">
+        android:background="@drawable/footer_box_border"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp">
 
         <LinearLayout
             android:id="@+id/footerAddressHeader"
@@ -308,5 +312,6 @@
         android:textAlignment="center" />
 
 </LinearLayout>
+
 
 

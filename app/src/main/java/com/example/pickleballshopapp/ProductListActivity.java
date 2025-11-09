@@ -38,11 +38,37 @@ public class ProductListActivity extends AppCompatActivity {
         String headerUrl = HeaderAssets.urlForCategory(category);
         String title = HeaderAssets.titleFor(category, brandName);
         
-        // Cập nhật title nếu có filter
+        // Cập nhật headerUrl nếu là brand Joola (vợt)
+        if ("racket".equalsIgnoreCase(category) && brandName != null && "Joola".equalsIgnoreCase(brandName)) {
+            headerUrl = HeaderAssets.JOOLA;
+        }
+        
+        // Cập nhật headerUrl nếu là brand Asics (giày)
+        if ("shoes".equalsIgnoreCase(category) && brandName != null && "Asics".equalsIgnoreCase(brandName)) {
+            headerUrl = HeaderAssets.ASICS;
+        }
+        
+        // Cập nhật headerUrl nếu là brand Babolat (giày)
+        if ("shoes".equalsIgnoreCase(category) && brandName != null && "Babolat".equalsIgnoreCase(brandName)) {
+            headerUrl = HeaderAssets.BABOLAT;
+        }
+        
+        // Cập nhật headerUrl nếu là brand On (giày)
+        if ("shoes".equalsIgnoreCase(category) && brandName != null && "On".equalsIgnoreCase(brandName)) {
+            headerUrl = HeaderAssets.ON;
+        }
+        
+        // Cập nhật headerUrl nếu là brand Wilson (giày)
+        if ("shoes".equalsIgnoreCase(category) && brandName != null && "Wilson".equalsIgnoreCase(brandName)) {
+            headerUrl = HeaderAssets.WILSON;
+        }
+        
+        // Cập nhật title và headerUrl nếu có filter
         if ("new_arrival".equals(filter)) {
             title = "Mới về";
         } else if ("best_seller".equals(filter)) {
             title = "Bán chạy nhất";
+            headerUrl = HeaderAssets.BEST_SELLER; // Sử dụng ảnh banner mới cho Best Seller
         }
 
         Glide.with(this).load(headerUrl).into(headerImage);

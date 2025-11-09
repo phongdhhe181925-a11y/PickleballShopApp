@@ -118,6 +118,17 @@
             android:textColor="@android:color/black"
             android:visibility="gone" />
 
+        <TextView
+            android:id="@+id/newArrivalDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Những mẫu vợt mới nhất được cập nhật"
+            android:textSize="14sp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btnViewAllNewArrival"
             android:layout_width="wrap_content"
@@ -154,6 +165,17 @@
             android:textStyle="bold"
             android:paddingHorizontal="16dp"
             android:paddingTop="24dp"
+            android:paddingBottom="8dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/bestSellerDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tổng hợp những mẫu vợt bán chạy nhất"
+            android:textSize="14sp"
+            android:paddingHorizontal="16dp"
             android:paddingBottom="8dp"
             android:textColor="@android:color/black"
             android:visibility="gone" />
@@ -279,23 +301,6 @@
                 android:textColor="@android:color/black"
                 android:visibility="gone" />
 
-            <Button
-                android:id="@+id/btnViewAllBalls"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
-                android:text="Xem tất cả"
-                android:textAllCaps="false"
-                android:paddingHorizontal="24dp"
-                android:paddingVertical="12dp"
-                android:backgroundTint="@android:color/black"
-                android:textColor="@android:color/white"
-                android:textSize="14sp"
-                android:visibility="gone" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -335,6 +340,22 @@
                     android:contentDescription="Sản phẩm sau" />
 
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnViewAllBalls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Xem tất cả"
+                android:textAllCaps="false"
+                android:paddingHorizontal="24dp"
+                android:paddingVertical="12dp"
+                android:backgroundTint="@android:color/black"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <include layout="@layout/footer" />
